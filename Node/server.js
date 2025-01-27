@@ -15,10 +15,10 @@ const prisma = new PrismaClient()
 
 
 //listar usuários
-app.get ('/usuarios', async (req, res) => {
+/*app.get ('/usuarios', async (req, res) => {
     const users = await prisma.user.findMany()
     res.status(200).json(users);
-})
+})*/
 
 
 //criar usuários
@@ -63,6 +63,23 @@ app.delete('/usuarios/:id', async (req, res) => {
     res.status(200).json({message: 'Usuário deletado com sucesso!'}); 
 })
 
+//criando filtro de usuários com query params
+app.get('/usuarios', async (req, res) => {
+    let users = []
 
+    if (req.query) {
+        users = await prisma.user.findMany({
+            where: {
+                name: req.query.name,
+                idade: req.query.idade,
+                email: req.query.email
+            }
+        })
+    } else {
+        users = await prisma.user.findMany()        
+    }
+    
+    res.status(200).json(users);
+})
 
 app.listen(3000)
