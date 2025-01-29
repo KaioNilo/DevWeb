@@ -10,11 +10,9 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-//cors
-import cors from 'cors';
-app.use(cors());
 
 //// ROTAS
+
 
 //listar usuários
 app.get ('/usuarios', async (req, res) => {
@@ -28,9 +26,8 @@ app.post('/usuarios', async (req, res) => {
     await prisma.user.create({
         data: {
             name: req.body.name,
-            age: req.body.age,
-            email: req.body.email
-            
+            email: req.body.email,
+            idade: req.body.idade
         }
     })
     
@@ -48,8 +45,8 @@ app.put('/usuarios/:id', async (req, res) => {
 
         data: {
             name: req.body.name,
-            age: req.body.age,
-            email: req.body.email
+            email: req.body.email,
+            idade: req.body.idade
         }
     })
 
@@ -67,6 +64,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 })
 
 //criando filtro de usuários com query params
+/*
 app.get('/usuarios', async (req, res) => {
     let users = []
 
@@ -74,8 +72,8 @@ app.get('/usuarios', async (req, res) => {
         users = await prisma.user.findMany({
             where: {
                 name: req.query.name,
-                email: req.query.email,
-                age: req.query.age
+                idade: req.query.idade,
+                email: req.query.email
             }
         })
     } else {
@@ -84,5 +82,6 @@ app.get('/usuarios', async (req, res) => {
     
     res.status(200).json(users);
 })
+*/
 
 app.listen(3000)
