@@ -67,7 +67,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 })
 
 //criando filtro de usuários com query params
-
+/*
 app.get('/usuarios', async (req, res) => {
     let users = []
 
@@ -76,7 +76,7 @@ app.get('/usuarios', async (req, res) => {
             where: {
                 name: req.query.name,
                 email: req.query.email,
-                age: req.query.age
+                idade: req.query.idade
             }
         })
     } else {
@@ -85,6 +85,10 @@ app.get('/usuarios', async (req, res) => {
     
     res.status(200).json(users);
 })
-
+*/
 
 app.listen(3000)
+
+
+
+DATABASE_URL="mongodb+srv://kaionilo:Prototype42*@cluster0.96ksv.mongodb.net/Users?retryWrites=true&w=majority&appName=Cluster0"

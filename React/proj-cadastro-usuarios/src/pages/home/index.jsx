@@ -13,23 +13,33 @@ function Home() {
   const inputEmail = useRef() 
 
 
+  //Buscar usuários
   async function getUsers () {
     const usersFromApi = await api.get('/usuarios')
     setUsers(usersFromApi.data)
   }
   
+  //Cadastrar usuário  
   async function createUsers () {
     await api.post('/usuarios', { 
       name: inputName.current.value,
       age: inputAge.current.value,
       email: inputEmail.current.value
     })
+    //chamando a função para atualizar os usuários automaticamente
     getUsers ()
   }
 
   useEffect(() => {
     getUsers ()
   }, [])
+
+  //Deletar usuário
+  async function deleteUsers (id) {
+    const usersFromApi = await api.delete(`/usuarios/${id}`)
+    //chamando a função para atualizar os usuários automaticamente
+    getUsers ()
+  }
 
   //html
   return (
@@ -43,6 +53,7 @@ function Home() {
 
           <label htmlFor="age">Idade:</label>
           <input type="text" name="age" id="age" placeholder='Digite sua idade' ref={inputAge} />
+
           <label htmlFor="email">Email:</label> 
           <input type="email" name="email" id="email" placeholder='Digite seu email' ref={inputEmail} />
 
@@ -58,7 +69,7 @@ function Home() {
               <p>Email: <span>{user.email}</span></p>
             </div>
 
-            <button>
+            <button onClick={() => deleteUsers(user.id)}>
               <img src={Trash} alt="Lixeira"/>
             </button>
           </div>

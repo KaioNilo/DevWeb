@@ -23,7 +23,6 @@ app.get ('/usuarios', async (req, res) => {
     res.status(200).json(users);
 })
 
-
 //criar usuários
 app.post('/usuarios', async (req, res) => {
     await prisma.user.create({
@@ -56,6 +55,7 @@ app.put('/usuarios/:id', async (req, res) => {
     res.status(201).json();
 })
 
+
 //deletar usuários
 app.delete('/usuarios/:id', async (req, res) => {        
     await prisma.user.delete({
@@ -67,7 +67,7 @@ app.delete('/usuarios/:id', async (req, res) => {
 })
 
 //criando filtro de usuários com query params
-
+/*
 app.get('/usuarios', async (req, res) => {
     let users = []
 
@@ -85,6 +85,6 @@ app.get('/usuarios', async (req, res) => {
     
     res.status(200).json(users);
 })
-
+*/
 
 app.listen(3000)
